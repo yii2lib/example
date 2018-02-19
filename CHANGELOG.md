@@ -1,7 +1,12 @@
 CHANGELOG
 ==================================================
 
-1.0.0, under development
+1.0.1 under development
 ------------------------
 
-- Initial commit.
+- no changes in this release.
+
+1.0.0 February 19, 2018
+------------------------
+
+- Initial release.
