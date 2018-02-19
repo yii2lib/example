@@ -1,12 +1,14 @@
 {
     "name": "yii2lib/example",
-    "description": "project example description",
+    "description": "Yii2 framework library example",
     "keywords": [
         "yii2",
+        "library",
         "example"
     ],
     "type": "library",
     "license": "BSD-3-Clause",
+    "homepage": "https://github.com/yii2lib/example",
     "support": {
         "issues": "https://github.com/yii2lib/example/issues",
         "forum": "https://github.com/yii2lib/example/issues",
@@ -19,7 +21,9 @@
             "email": "frontbear@outlook.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {
+        "php": ">=7.0.0",
         "yiisoft/yii2": "~2.0.14"
     },
     "require-dev": {
@@ -34,6 +38,12 @@
     "autoload": {
         "psr-4": {
             "yii2lib\\example\\": "src"
+        }
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
         }
     },
     "extra": {
