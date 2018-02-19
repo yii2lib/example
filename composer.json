@@ -1,0 +1,44 @@
+{
+    "name": "yii2lib/example",
+    "description": "project example description",
+    "keywords": [
+        "yii2",
+        "example"
+    ],
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yii2lib/example/issues",
+        "forum": "https://github.com/yii2lib/example/issues",
+        "wiki": "https://github.com/yii2lib/example/wiki",
+        "source": "https://github.com/yii2lib/example"
+    },
+    "authors": [
+        {
+            "name": "Ruitang Du",
+            "email": "frontbear@outlook.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.14"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0.0 || ~6.5.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "yii2lib\\example\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+# System Files
+Thumbs.db
+.DS_Store
+
+# IDE Files
+.idea
+nbproject
+.buildpath
+.project
+.settings
+
+# Project Files
+/vendor
+composer.phar
+phpunit.phar
+composer.lock
+phpunit.xml
+php-cs-fixer.phar
+.php_cs.cache
