@@ -15,11 +15,9 @@ use yii\console\Application as ConsoleApplication;
 use yii\db\Connection as DbConnection;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
+use PHPUnit\Framework\TestCase as UnitTestCase;
 
-/**
- * Base class for the test cases.
- */
-class TestCase extends \PHPUnit\Framework\TestCase
+class TestCase extends UnitTestCase
 {
     /**
      * {@inheritdoc}
@@ -36,8 +34,10 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        $this->destroyApplication();
-        $this->removeTestFilePath();
+        // destroy application
+        Yii::$app = null;
+        // remove test directory
+        FileHelper::removeDirectory($this->getTestDirectoryPath());
     }
 
     /**
@@ -51,7 +51,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         new $appClass(ArrayHelper::merge([
             'id' => 'testapp',
             'basePath' => __DIR__,
-            'vendorPath' => $this->getVendorPath(),
+            'vendorPath' => dirname(__DIR__) . '/vendor',
             'components' => [
                 'db' => [
                     'class' => DbConnection::class,
@@ -62,68 +62,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return string vendor path
-     */
-    protected function getVendorPath(): string
-    {
-        return dirname(__DIR__) . '/vendor';
-    }
-
-    /**
-     * Destroys application in Yii::$app by setting it to null.
-     */
-    protected function destroyApplication(): void
-    {
-        Yii::$app = null;
-    }
-
-    /**
-     * @return string test file path
-     */
-    protected function getTestFilePath(): string
-    {
-        return Yii::getAlias('@runtime/example-test');
-    }
-
-    /**
-     * Ensures test file path exists.
+     * get test directory path, also ensures that path exists
      * @return string test file path
      * @throws \yii\base\Exception
      */
-    protected function ensureTestFilePath(): string
+    protected function getTestDirectoryPath(): string
     {
-        $path = $this->getTestFilePath();
+        $path = Yii::getAlias('@runtime/example-test');
+
+        // ensures the path exists
         FileHelper::createDirectory($path);
 
         return $path;
-    }
-
-    /**
-     * Removes the test file path.
-     * @throws \yii\base\ErrorException
-     */
-    protected function removeTestFilePath(): void
-    {
-        $path = $this->getTestFilePath();
-        FileHelper::removeDirectory($path);
-    }
-
-    /**
-     * Invokes object method, even if it is private or protected.
-     * @param object $object object
-     * @param string $method method name
-     * @param array $args method arguments
-     * @return mixed method result
-     * @throws \ReflectionException
-     */
-    protected function invoke($object, $method, array $args = [])
-    {
-        $classReflection = new \ReflectionClass(get_class($object));
-        $methodReflection = $classReflection->getMethod($method);
-        $methodReflection->setAccessible(true);
-        $result = $methodReflection->invokeArgs($object, $args);
-        $methodReflection->setAccessible(false);
-
-        return $result;
     }
 }
